@@ -1,4 +1,55 @@
 /*
   This is the style sheet for CS290's assignment 2
   Keith McKinley
+tbody > tr > th {
+	font-style: bold;
+}
 */
+table {
+	border: 1px solid black;
+}
+thead > th: {
+   font-weight: bold;
+   background-color: #FFFFFF;
+   border: 1px solid black;
+}
+tfoot > tr > td: {
+   background-color: yellow;
+   border: 1px solid black;
+}
+tbody > tr:nth-child(2n+1) {
+	background: lightGreen;
+	border: 1px solid black;
+}
+tbody > tr:nth-child(2n+2) {
+	background: lightBlue;
+	border: 1px solid black;
+}
+tbody > tr > th {
+	font-style: italic;
+	font-weight: normal;
+	border: 1px solid black;
+}
+tbody > tr > td {
+	border: 1px solid black;
+}
+tbody > tr > td:nth-child(2) {
+	color: red;
+}
+tbody > tr > td:nth-child(4) {
+	color: blue;
+}
+#outer-content {
+	background-color: pink;
+	margin-left: 0%;
+	width: 75%;
+}
+#inner-content {
+	background-color: lightblue;
+	margin-left: 12%;
+	width: 75%;
+}
+dt:hover + dd {
+	background-color: purple;
+}
+dt:hover ~ dt {}

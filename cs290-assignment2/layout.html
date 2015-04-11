@@ -1,59 +1,117 @@
 <html>
 <head>
   <title>Assignment 2</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-<table>
-	<CAPTION>Strengths of each liquid handler</CAPTION>
-	<THEAD>
-		<td></td>
-		<td>Bravo</td>
-		<td>Evo</td>
-		<td>STAR</td>
-		<td>Janus</td>
-		<td>Lynx</td>
-	</THEAD>
-	<tr>
-		<td>Bravo</td>
-		<td>N/A</td>
-		<td>Tiny footprint</td>
-		<td>Tiny footprint</td>
-		<td>Better integrated</td>
-		<td>Good history</td>
-	</tr>
-	<tr>
-		<td>Evo</td>
-		<td>Deck space</td>
-		<td>N/A</td>
-		<td>Longer track record</td>
-		<td>More configurable</td>
-		<td>Good history</td>
-	</tr>
-	<tr>
-		<td>STAR</td>
-		<td>Pipetting options</td>
-		<td>Pipetting options</td>
-		<td>N/A</td>
-		<td>More configurable</td>
-		<td>Good History</td>
-	</tr>
-	<tr>
-		<td>Janus</td>
-		<td>96/384</td>
-		<td>GUI</td>
-		<td>GUI</td>
-		<td>N/A</td>
-		<td>GUI</td>
-	</tr>
-	<tr>
-		<td>Lynx</td>
-		<td>VVP</td>
-		<td>VVP</td>
-		<td>VVP</td>
-		<td>Configurable</td>
-		<td>N/A</td>
-	</tr>
-</table>
+<div id="grid">
+	<table>
+		<CAPTION> ---------Strengths of each liquid handler--------- </CAPTION>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Bravo</th>
+				<th>Evo</th>
+				<th>STAR</th>
+				<th>Janus</th>
+				<th>Lynx</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td colspan="2">Left</td>
+				<td colspan="4">Right</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th>Bravo</th>
+				<td>N/A</td>
+				<td>Tiny footprint</td>
+				<td>Tiny footprint</td>
+				<td>Better integrated</td>
+				<td>Good history</td>
+			</tr>
+			<tr>
+				<th>Evo</th>
+				<td>Deck space</td>
+				<td>N/A</td>
+				<td>Longer track record</td>
+				<td>More configurable</td>
+				<td>Good history</td>
+			</tr>
+			<tr>
+				<th>STAR</th>
+				<td>Pipetting options</td>
+				<td>Pipetting options</td>
+				<td>N/A</td>
+				<td>More configurable</td>
+				<td>Good History</td>
+			</tr>
+			<tr>
+				<th>Janus</th>
+				<td>96/384</td>
+				<td>GUI</td>
+				<td>GUI</td>
+				<td>N/A</td>
+				<td>GUI</td>
+			</tr>
+			<tr>
+				<th>Lynx</th>
+				<td>VVP</td>
+				<td>VVP</td>
+				<td>VVP</td>
+				<td>Configurable</td>
+				<td>N/A</td>
+			</tr>
+		</tbody> 
+	</table>
+</div>
+<div id="list">
+	<dl>
+		<dt>Bravo</dt>
+		<dd>Agilent</dd>
+		<dt>Evo</dt>
+		<dd>Tecan</dd>
+		<dt>STAR</dt>
+		<dd>Hamilton</dd>
+		<dt>Janus</dt>
+		<dd>Perkin Elmer</dd>
+		<dt>Lynx</dt>
+		<dd>Dynamic Devices</dd>
+	</dl>
+</div>
+<div id="outer-content">
+	<br>
+	<div id="inner-content">
+		<p>inner content</p>
+		<p>second paragraph</p>
+	</div>
+	<br>
+</div>
+<br>
+<div id="form">
+	<form action="http://web.engr.oregonstate.edu/~osterbit/2/repo/class-content/form_tests/Formtest.php" method="post">
+		text:  <input type="text" name="text_input"><br>
+		number:  <input type="number" name="numerical_input"><br>
+		password:  <input type="password" name="password_input"><br>
+		candy:  <input type="radio" name="candy" value="Snickers">Snickers 
+		<input type="radio" name="candy" value="Skittles">Skittles 
+		<input type="radio" name="candy" value="Mentos">Mentos  <br>
+		<input type="submit" 
+	</form>
+</div>
+<div id="form">
+	<form action="http://web.engr.oregonstate.edu/~osterbit/2/repo/class-content/form_tests/Formtest.php" method="get">
+		text:  <input type="text" name="text_input"><br>
+		number:  <input type="number" name="numerical_input"><br>
+		password:  <input type="password" name="password_input"><br>
+		candy:  <input type="radio" name="candy" value="Snickers">Snickers 
+		<input type="radio" name="candy" value="Skittles">Skittles 
+		<input type="radio" name="candy" value="Mentos">Mentos  <br>
+		<input type="submit" 
+	</form>
+</div>
 </body>
 </html>
