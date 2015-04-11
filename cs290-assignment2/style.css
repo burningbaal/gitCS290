@@ -53,3 +53,7 @@ dt:hover + dd {
 	background-color: purple;
 }
 dt:hover ~ dt {}
+img {
+	float: left;
+	margin: 10px;
+}
