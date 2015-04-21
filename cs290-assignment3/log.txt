@@ -1,1 +1,5 @@
-You log goes in this  file.
+Start: Mon, 20 Apr 2015 17:30 -0800
+End: Mond, 20 Apri 2015 17:30 -0800
+Tasks:  Read assignment, imported files from class repo, started log, familiarized myself with starting src files
+
+
