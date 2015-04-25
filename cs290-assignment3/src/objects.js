@@ -72,6 +72,34 @@ function MessageLog (user) {
 * received.
 */
 //your code here
+function MessageLog (user) {
+	this.user = user;
+	this.Sent = [];
+	this.Received = [];
+	function logMessage(messageText, direction){
+		if (direction === 0) 
+		{
+			//sent message
+			this.Sent.push(messageText);
+		}
+		else{
+			//rec'd message
+			this.Received.push(messageText);
+		}
+	}
+	function getSentMessage(n) {
+        return this.sent[n];
+    }
+	function totalSent(){
+        return this.Sent.length;
+    }
+	function totalReceived() {
+        return this.Received.length;
+    }
+	function lastReceivedMessage() {
+		return this.Received[this.Received.length - 1];
+	}
+}
 
 //end your code
 
@@ -83,4 +111,8 @@ function MessageLog (user) {
 
 //your code here
 
+var myLog = new MessageLog("BlackHatGuy");
+myLog.logMessage("foo", 1);
+myLog.logMessage("bar", 1);
+myLog.logMessage("baz", 1);
 //end your code
