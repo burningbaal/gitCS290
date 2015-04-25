@@ -33,7 +33,21 @@ var barType = typeof bar;
 */
 
 //your code here
-
+function(float[] doubleArray)
+{
+	boolean retVal = true;
+	for(float dbl : doubleArray)
+	{ 
+		if (dbl <= dbl.MAX_VALUE)
+		{
+			dbl = dlb * 2;
+		}
+		else{
+			retVal = false;
+		}
+	}
+	return retVal;
+}
 //end your code
 
 /**
@@ -69,5 +83,23 @@ function GitLog(hash, date, message) {
 */
 
 //your code here
-
+function parseGit(logArray) {
+	//iteration isn't working
+	var curLogs;// = [];
+	for(i = 0; i < logArray.size(); i++)
+	{
+		var hash = logArray[i].substring(0, logArray[i].search(" "));
+		var date = logArray[i].substring(logArray[i].search(" ") + 1, logArray[i].search("\""));
+		var msg = logArray[i].substring(logArray[i].search("\""), logArray[0].length);
+		var curLog = new GitLog(hash, date, msg);
+        if (i === 0)
+        {
+            curLogs = [curLog];
+        }
+        else
+        {
+            curLogs.push(curLog);
+        }
+	}
+    return curLogs;
 //end your code
