@@ -42,24 +42,24 @@ function MessageLog (user) {
 	this.user = user;
 	this.Sent = [];
 	this.Received = [];
-	function logMessage(messageText, direction){
+	this.logMessage = function(messageText, direction){
 		if (direction === 0) 
 		{
 			//sent message
-			this.Sent.push(messageText);
+			this.Sent.unshift(messageText);
 		}
 		else{
 			//rec'd message
-			this.Received.push(messageText);
+			this.Received.unshift(messageText);
 		}
 	}
-	function getSentMessage(n) {
-        return this.sent[n];
+	this.getSentMessage= function(n) {
+        return this.Sent[n];
     }
-	function totalSent(){
+	this.totalSent = function(){
         return this.Sent.length;
     }
-	function totalReceived() {
+	this.totalReceived = function() {
         return this.Received.length;
     }
 	
@@ -72,34 +72,10 @@ function MessageLog (user) {
 * received.
 */
 //your code here
-function MessageLog (user) {
-	this.user = user;
-	this.Sent = [];
-	this.Received = [];
-	function logMessage(messageText, direction){
-		if (direction === 0) 
-		{
-			//sent message
-			this.Sent.push(messageText);
-		}
-		else{
-			//rec'd message
-			this.Received.push(messageText);
-		}
-	}
-	function getSentMessage(n) {
-        return this.sent[n];
-    }
-	function totalSent(){
-        return this.Sent.length;
-    }
-	function totalReceived() {
-        return this.Received.length;
-    }
-	function lastReceivedMessage() {
-		return this.Received[this.Received.length - 1];
-	}
-}
+MessageLog.prototype.lastReceivedMessage = function(){
+		return this.Received[0];
+};
+
 
 //end your code
 

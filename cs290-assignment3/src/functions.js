@@ -13,8 +13,7 @@
 */
 
 //your code here
-function uselessFunction()
-{
+function uselessFunction() {
 	return null;
 }
 //end your code
@@ -33,21 +32,24 @@ var barType = typeof bar;
 */
 
 //your code here
-function(float[] doubleArray)
-{
-	boolean retVal = true;
-	for(float dbl : doubleArray)
+bar = function(doubleArray){
+	var dbl = typeof double;
+    dbl = 0;
+	for(var i = 0; i < doubleArray.length; i++)
 	{ 
-		if (dbl <= dbl.MAX_VALUE)
+		if(isNaN(doubleArray[i]))
 		{
-			dbl = dlb * 2;
+			return false;
 		}
-		else{
-			retVal = false;
+		try {
+			doubleArray[i] *= 2;
+		}
+		catch(err) {
+			return false;
 		}
 	}
-	return retVal;
-}
+	return true;
+};
 //end your code
 
 /**
@@ -85,21 +87,27 @@ function GitLog(hash, date, message) {
 //your code here
 function parseGit(logArray) {
 	//iteration isn't working
-	var curLogs;// = [];
-	for(i = 0; i < logArray.size(); i++)
+	var curLogs = new Array(logArray.length);
+	for(i = 0; i < logArray.length; i++)
 	{
+		//alert(logArray[i].substring(0, logArray[i].search(" ")));
 		var hash = logArray[i].substring(0, logArray[i].search(" "));
-		var date = logArray[i].substring(logArray[i].search(" ") + 1, logArray[i].search("\""));
-		var msg = logArray[i].substring(logArray[i].search("\""), logArray[0].length);
-		var curLog = new GitLog(hash, date, msg);
-        if (i === 0)
+		var date = new Date(logArray[i].substring(logArray[i].search(" ") + 1, logArray[i].search("\"")) );
+		//alert(hash + (logArray[i].substring(logArray[i].search(" ") + 1, logArray[i].search("/""))).ToString);
+		var msg = logArray[i].substring(logArray[i].search('"')+1, logArray[i].length);
+		msg = msg.substring(0, msg.length- 1);
+		//alert(hash + " " + String(date) + " " + msg);
+		//var curLog = new GitLog(hash, date, msg);
+		curLogs[i] = (new GitLog(hash, date, msg) );
+        /*if (i === 0)
         {
-            curLogs = [curLog];
+            curLogs.push(new curLog);
         }
         else
         {
-            curLogs.push(curLog);
-        }
+            curLogs.push(new curLog);
+        }*/
 	}
     return curLogs;
+}
 //end your code

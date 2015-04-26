@@ -73,6 +73,7 @@ test("parseGit function tests",function(assert){
 	var logsParsed = [new GitLog('3782618', new Date('Wed, 7 Jan 2015 21:42:26 -0800'), "Initial commit" ), new GitLog('c314332', new Date('Wed, 7 Jan 2015 22:02:38 -0800'), "Add empty bio.md" )];
 	assert.ok(typeof parseGit == 'function', 'parseGit function exists.');
 	var result = parseGit(logs);
+	//assert.ok(typeof result[0] == typeof logsParsed[0], 'parseGit function returns as ' + String(typeof result[0]));
 	assert.equal(result[0].hash,logsParsed[0].hash,'Properly parses hash 0.');
 	assert.equal(result[1].hash,logsParsed[1].hash,'Properly parses hash 1.');
 	assert.equal(result[0].message,logsParsed[0].message,'Properly parses message 0.');
