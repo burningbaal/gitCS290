@@ -1,0 +1,28 @@
+/*
+Keith McKinley
+CS290 - Spring 2015
+Assignment4
+borrowed from http://jsfiddle.net/guanome/VGEjB/1/
+*/
+h1
+{
+    font-size: 2em;
+    font-style: bold;
+    font-weight: bold;
+}
+iframe
+{
+    border: solid 5px;
+    width:99%;
+    height:100px;
+    display: block;
+    margin-bottom: 10px;
+}
+#github
+{
+    border-color: green;
+}
+#google
+{
+    border-color: red;
+}
