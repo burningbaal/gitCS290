@@ -5,3 +5,7 @@ Tasks:  Read assignment, imported files from class repo, started log, familiariz
 Start: Sat, 25 Apr 2015 10:20 -0800
 End:  Sat 25 Apr 2015 6:10 -0800
 Tasks: finished functions.js and objects.js, fixed variables.js  Spent a huge amount of time debugging the parseGit() function.
+
+Start: Sun, 26 Apr 2015 14:20 -0800
+End:  Sun 26 Apr 2015 23:20 -0800
+Tasks: Finished assignment 3, barely have a gists api pull working.  barely the radio buttons to filter the data
