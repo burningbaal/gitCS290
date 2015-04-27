@@ -1,11 +1,10 @@
 //http://stackoverflow.com/questions/14949210/dynamically-update-a-table-using-javascript
-function getGists()
-{
+
     var request = new XMLHttpRequest();
     request.onload = requestResponse;
     request.open('get', 'https://api.github.com/gists', true);
     request.send();
-}
+
     var allGists = "uh-oh, No Gists!";
 function insertRow(tableName, rowNum, data, url)
 {    //data should be array of strings (each column of the table)
@@ -45,8 +44,6 @@ function getRadioVal(form, name)
     return val; // return value of checked radio or undefined if none checked
 }
 
-
-
 function requestResponse()
 {
 	var responseObj = JSON.parse(this.responseText);
@@ -69,9 +66,9 @@ function requestResponse()
             {
                 //console.log("file: " + index);
                 GistData[3] = String(responseObj[iter].files[index].language);
-                var LangSelected = getRadioVal(document.getElementById('langForm'),'LangRadio');
+                var LangSelected = getRadioVal(document.getElementById('GistForm'),'lang');
                 console.log(LangSelected);
-                if(GistData[3] == langSelected)
+                if(LangSelected == undefined || GistData[3] == langSelected)
                 {
                     insertRow('GistsTable',document.getElementById("GistsTable").rows.length, GistData, responseObj[iter].url);
                     count++;
@@ -83,4 +80,4 @@ function requestResponse()
     }
 
 	//
-}
+};
