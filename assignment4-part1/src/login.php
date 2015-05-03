@@ -37,6 +37,18 @@ content1.php must have a link to content2.php that is displayed only after a use
 *******************/
 ?>
 <html>
+<head>
+	<?php
+	if (!(isset($_GET['logout'])) )
+	{
+		// destroy the session
+		session_unset();
+		session_destroy();
+	}
+	session_start();
+	//$_SESSION['count'] = -1; //set the count
+	?>
+</head>
 <h1>
 Welcome to the login page!
 </h1>
