@@ -15,5 +15,6 @@ End: Sun, 03 May 2015 14:45 -0800
 Tasks:  Got login.php and content pages finished
 
 Start: Sun, 03 May 2015 14:45 -0800
-End: Sun, 03 May 2015 16:15 -0800
-Tasks:  Got loopback.php written and working.  waiting for clairity about handling both a GET and POST at the same time.
+End: Sun, 03 May 2015 17:00 -0800
+Tasks:  Got loopback.php written and working.  
+
