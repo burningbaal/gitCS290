@@ -21,10 +21,10 @@ header('Content-Type: application/json');
 $numGet = count($_GET);
 $numPost = count($_POST);
 
-$output = "{";
+$output = "";
 if ($numGet == 0)
 {
-	$output .= '"Type":"GET","parameters":null}';
+	$output .= '{"Type":"GET","parameters":null}';
 }
 else 
 {
