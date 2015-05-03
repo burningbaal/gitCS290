@@ -6,7 +6,16 @@
 login.php should have a form where a user can enter a username. 
 It should have a button that says "Login". Upon clicking the login button 
 	the page should POST the username to the page content1.php. 
-	The username should be posted via a parameter called username. 
+	
+
+?>
+
+<html>
+<header>
+Welcome to the login page.
+</header>
+<body>
+	<form id="login" action="content.php" method="POST">The username should be posted via a parameter called username. 
 	If the username is an empty string or null, content1.php should display the message 
 		"A username must be entered. Click here to return to the login screen.". 
 		The text 'here' should be a link that links back to login.php. 
@@ -27,3 +36,14 @@ One might be to set a variable when a session is started the 'correct' way and c
 content1.php must have a link to content2.php that is displayed only after a user has logged in (this includes subsequent visits not from login.php). content2.php should have a link back to content1.php. Both content1.php and content2.php should require that a user at some point logged in to access them. Otherwise they should redirect back to login.php.content1.php must have a link to content2.php that is displayed only after a user has logged in (this includes subsequent visits not from login.php). content2.php should have a link back to content1.php. Both content1.php and content2.php should require that a user at some point logged in to access them. Otherwise they should redirect back to login.php.
 *******************/
 ?>
+<html>
+<h1>
+Welcome to the login page!
+</h1>
+<body>
+	<form action="content1.php" method="POST">
+		username: <input type="text" name="username"><br>
+		<input type="submit">
+	</form>
+</body>
+</html>
