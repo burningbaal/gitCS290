@@ -179,8 +179,8 @@ if(isset($_POST["deleteAll"])) {
 		</form>
 	</table>
 	<br>
-	<div style="width: 700px; overflow: hidden; border: 1px solid black;">
-		<div style="width: 320px; float: left;"> 
+	<div style="width: 630px; overflow: hidden; border: 1px solid black;">
+		<div style="width: 320px; float: left;  border: 1px solid black;"> 
 			<h2 style="font-size: 1.5em; font-weight: bold;"> 
 				Add a new Video
 			</h2>
@@ -198,9 +198,10 @@ if(isset($_POST["deleteAll"])) {
 				<button type="submit" name="AddVideo" value="1">Add video</button>
 			</form>
 		</div>
-		<br>
-		<div id="Add Video" style="margin-left: 305px; width: 250px">
-			<br><br><br>
+		<div id="Add Video" style="margin-left: 350px; width: 250px;">
+			<h2 style="font-size: 1.5em; font-weight: bold;"> 
+				Other Actions
+			</h2>
 			<form id="General" method="POST" action="mainPage.php">
 				<select name="categories">
 					<option value="AllCategories">All Categories</option>
@@ -216,7 +217,7 @@ if(isset($_POST["deleteAll"])) {
 					?>
 				</select>
 				<button type="submit" name="filter" value="filterCategories">Filter on category</button>
-				<br><br>
+				<br><br><br><br>
 				<button type="submit" name="deleteAll" value="DeleteAllVideos">Delete All Videos</button>
 			</form>
 		</div>

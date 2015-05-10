@@ -2,3 +2,6 @@ Start: Wed, 09 May 2015 08:00 -0800
 End: Wed, 09 May 2015 15:00 -0800
 Tasks: From nothing, nearly completed, just some organizational improvements, then testing left.
 
+Start: Wed, 09 May 2015 19:00 -0800
+End: Wed, 09 May 2015 22:00 -0800
+Tasks: Better looking and some of the testing guidelines completed.  Need to finish going through the tests tomorrow.
