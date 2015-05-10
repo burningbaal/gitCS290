@@ -41,13 +41,19 @@ mysql_select_db($dbname, $mysql_handle)
 if(isset($_POST["AddVideo"])){
 	//echo "captured addVideo\n";
 	$AddError = "";
-	if(strlen($_POST['name']) == 0 || strlen($_POST['name']) > 255) {
+	if(strlen($_POST['name']) > 255) {
 		$AddError .= "Movie name is too long.<br>";
 	}
-	if(strlen($_POST['category']) == 0 || strlen($_POST['category']) > 255) {
+	if(strlen($_POST['name']) == 0 ){
+		$AddError .= "Movie name must exist.<br>";
+	}
+	if(strlen($_POST['category']) > 255) {
 		$AddError .= "Movie category is too long.<br>";
 	}
-	if(is_numeric($_POST['length']) == 0 || (int)$_POST['length'] != $_POST['length']) {
+	/*if(strlen($_POST['category']) == 0) {
+		$AddError .= "Movie category must exist.<br>";
+	}*/
+	if( strlen($_POST['length']) > 0 && (is_numeric($_POST['length']) == 0 || (int)$_POST['length'] != $_POST['length'] || 0 > (int)$_POST['length']) ) {
 		$AddError .= "Movie length must be an integer.<br>";
 	}
 	if(strlen($AddError) < 10) {
@@ -151,12 +157,14 @@ if(isset($_POST["deleteAll"])) {
 			//get rows
 			$tempQuery = $selectQuery;
 			$query = mysql_query($tempQuery);
+			$MoviesPresent = 0;
 			if($query) {
 				//got rows!
 				while($row = mysql_fetch_assoc($query)) { //iterate through the received rows
 					echo "<td>" . mysql_real_escape_string($row['name']) . "</td>\n\t" . 
 					"<td>" . mysql_real_escape_string($row['category']) . "</td>\n\t" . 
 					"<td>" . mysql_real_escape_string($row['length']) . "</td>\n\t";
+					$MoviesPresent = 1;
 					if ($row['rented']) {
 						echo "<td>checked Out</td>\n\t";
 						echo "<td><button type=\"submit\" name=\"checkIn\"  value=\"" . $row['id'] . "\">check-in</button>";
@@ -172,6 +180,10 @@ if(isset($_POST["deleteAll"])) {
 			}
 			else {
 				die('Invalid query: ' . mysql_error());
+			}
+
+			if ($MoviesPresent == 0) {
+				echo "<td>No movies in the store...</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>";
 			}
 			//mysql_free_result($query); //http://php.net/manual/en/function.mysql-query.php to release the resource on the server
 			
@@ -206,7 +218,7 @@ if(isset($_POST["deleteAll"])) {
 				<select name="categories">
 					<option value="AllCategories">All Categories</option>
 					<?php
-						$tempQuery = "SELECT DISTINCT category FROM videoStore;";
+						$tempQuery = "SELECT DISTINCT category FROM videoStore WHERE category<>\"\";";
 						$query = mysql_query($tempQuery);
 						if($query) {
 							//got rows!

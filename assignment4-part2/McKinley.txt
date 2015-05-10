@@ -1,0 +1,11 @@
+Start: Sat, 09 May 2015 08:00 -0800
+End: Sat, 09 May 2015 15:00 -0800
+Tasks: From nothing, nearly completed, just some organizational improvements, then testing left.
+
+Start: Sat, 09 May 2015 19:00 -0800
+End: Sat, 09 May 2015 22:00 -0800
+Tasks: Better looking and some of the testing guidelines completed.  Need to finish going through the tests tomorrow.
+
+Start: Sun, 10 May 2015 18:00 -0800
+End: Sun, 10 May 2015 9:30 -0800
+Tasks: Finished all the tests, all pass with flying colors.
