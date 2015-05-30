@@ -1,0 +1,136 @@
+/*
+* Keith McKinley
+* CS290 Spring 2015
+* How-to guide
+* style sheet to standardize fonts/etc throughout my guide
+*/
+
+
+/*
+ * Override Bootstrap's default container.
+ */
+
+@media (min-width: 1200px) {
+  .container {
+    width: 60%;
+	margin-left: 20%;
+  }
+}
+
+.navbar-static-top{
+  background-color: #c34500;
+  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+}
+.blog-post-title {
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+/*override Bootstrap's font size for pre (it's just too small!)*/
+pre {
+	font-size: 1.1em;
+}
+.NavTd {
+	padding-left: 10px;
+	font-size: 1.3em;
+}
+p {
+	font-size: 1.4em;
+	line-height: 1.4;
+	color: gray;
+}
+.TitleBar {
+	float: left;
+	width: 70%;
+	height: 200px;
+}
+.nodeGraphic {
+	height: 200px;
+	margin-right: 5px;
+}
+nav-item {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: #cdddeb;
+}
+nav-item:hover,
+nav-item:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+navbar {
+	
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -5px;
+  vertical-align: middle;
+  content: " ";
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid;
+  border-left: 5px solid transparent;
+}
+
+.navBar {
+	column-width: 20%;
+}
+
+.navbar-static-top .active {
+  color: #fff;
+}
+
+body {
+	font-family: Georgia, Helvetica, Arial;
+	color: 555;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: Helvetica;
+	font-family: bold;
+}
+
+h1, .h1 {
+	width: 35%;
+}
+
+h2 {
+	font-size: 1.8em;
+	color: gray;
+}
+.mainText {
+	width: 50%;
+}
+
+p {
+  margin:0 0 10px
+}
+	
+/*
+ * Footer
+ */
+
+.HowTo-footer {
+  padding: 40px 0;
+  color: #999;
+  text-align: center;
+  background-color: #f5f2ed;
+  border-top: 1px solid #e5e5e5;
+}
+.HowTo-footer, p:last-child {
+  margin-bottom: 0;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #eaeaea;
+} 
