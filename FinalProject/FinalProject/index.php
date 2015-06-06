@@ -17,8 +17,6 @@ $mysql_handle = mysql_connect($dbhost, $dbuser, $dbpass)
 mysql_select_db($dbname, $mysql_handle)
     or die("Error selecting database: $dbname");
 
-echo 'Successfully connected to database!';
-
 ?>
 
 <html>
@@ -55,8 +53,28 @@ echo 'Successfully connected to database!';
 				var password = $('#LoginPassword').val();
 				loginOutput += passwordValid(password);
 				
-				if (loginOutput.length > 0) {
+				if (loginOutput.length == 0) {
 					//submit to login
+					//alert('going to submit');
+					$.post( $("#login").attr("action"),
+					{ name: loginName, pass: password },
+						function(result){ 
+							//alert(result);
+							if (result.indexOf("http://") >= 0) {
+								//alert(result);
+								$form = $('<form action="' + result + '" method="post">' + '<input type="text" name="user" value="' + loginName + '" />' + '</form>');
+								$('body').append($form);
+								console.log($form.serialize());
+								$form.submit();
+								//alert("didn't submit");
+								//window.location.replace(result);
+							}
+							//alert(result);
+							loginOutput = result;
+							$('#usernameAbsent').html(loginOutput);
+					});
+					//loginOutput = result + "<br>";
+					//$('#usernameAbsent').html(loginOutput);
 				}
 				$('#usernameAbsent').html(loginOutput);
 			}); 
@@ -69,7 +87,6 @@ echo 'Successfully connected to database!';
 				var pass2 = $('#password2').val();
 				var mail1 = $('#email1').val();
 				var mail2 = $('#email2').val();
-				signupOutput += pass1 + "<br>";
 				signupOutput += uNameValid(userName);
 				signupOutput += passwordValid(pass1);
 				signupOutput += emailValid(mail1);
@@ -79,8 +96,33 @@ echo 'Successfully connected to database!';
 				if (mail1 != mail2) {
 					signupOutput += 'E-mail addresses must match<br> ';// + mail1 + " " + mail2;
 				}
+				//alert(signupOutput);	
+				if (signupOutput.length == 0) {
+					//submit to login
+					//alert('going to submit');
+					//alert('name: ' + userName + ', pass: ' + pass1 + ', email: ' + mail1);
+					$.post( $("#login").attr("action"),
+					{ name: userName, pass: pass1, email: mail1 },
+						function(result){ 
+							//alert(result);
+							if (result.indexOf("http://") >= 0) {
+								//alert(result.indexOf("http://"));
+								var form = $('<form action="' + result + '" method="post">' +
+								  '<input type="text" name="newUser" value="' + userName + '" />' +
+								  '</form>');
+								$('body').append(form);
+								form.submit();
+								window.location.replace(result);
+							}
+							//alert(result);
+							signupOutput = result;
+							$('#signupOutput').html(signupOutput);
+					});
+					signupOutput += 'Tried to submit<br>';
+				}
 				$('#signupOutput').html(signupOutput);
-			});
+				signupOutput = '';
+			}); 
 			function uNameValid(uName) {
 				var output = "";
 				var min_chars = 3;
@@ -184,7 +226,7 @@ Welcome to The Address Book!
 	</script>
 	<fieldset>
 	<h3>Returning users, login:</h3>
-	<form id="login" method="POST" onsubmit="return checkLogin(this;);">
+	<form id="login" method="POST" action="loginChecker.php">
 		<table> <tr>
 		<td><b>User name: </td><td><input type="text" id="LoginUsername"></td></tr>
 		<tr><td><b>Password: </td><td><input type="password" id="LoginPassword"></td></tr>
@@ -197,7 +239,7 @@ Welcome to The Address Book!
 	<a href="MyAddresses.php">Test Link</a>
 	<fieldset>
 	<h3>New Users, create an account:</h3>
-	<form id="signup" method="POST" onsubmit="return checkLogin(this;);">
+	<form id="signup" method="POST" action="loginChecker.php">
 		<table> <tr>
 		<td><b>User name: </td><td><input type="text" id="signupName"></td></tr>
 		<tr><td><b>Password: </td><td><input type="password" id="password1"></td></tr>

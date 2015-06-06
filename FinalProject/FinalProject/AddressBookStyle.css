@@ -42,7 +42,15 @@ p {
 .TitleBar {
 	float: left;
 	width: 70%;
-	height: 200px;
+	height: 100px;
+	color: c34500;
+}
+.logout {
+   position:absolute;
+   top:0;
+   right:0;
+   font-size: 1.5em;
+   color: 999;
 }
 .nodeGraphic {
 	height: 200px;
@@ -100,19 +108,48 @@ h6, .h6 {
 }
 
 h1, .h1 {
-	width: 35%;
+	/*width: 35%;*/
+	color: #c34500;
+	font-style: bold;
 }
 
 h2 {
 	font-size: 1.8em;
-	color: gray;
 }
 .mainText {
 	width: 50%;
 }
 
 p {
-  margin:0 0 10px
+  margin:0 0 10px;
+}
+
+table {
+    width: 75%;
+}
+.table-striped > thead > tr:nth-child(odd) > th   {
+	background-color: #c34500;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #999;
+} 
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+	background-color: #f5f2ed;
+} 
+.button {
+  /*font: bold 11px Arial;*/
+  text-decoration: none;
+  background-color: c34500;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 4px solid #CCCCCC;
+  border-right: 4px solid #333333;
+  border-bottom: 4px solid #333333;
+  border-left: 4px solid #CCCCCC;
+  text-align: center;
 }
 	
 /*
@@ -129,8 +166,3 @@ p {
 .HowTo-footer, p:last-child {
   margin-bottom: 0;
 }
-
-.table-striped > tbody > tr:nth-child(odd) > td,
-.table-striped > tbody > tr:nth-child(odd) > th {
-	background-color: #eaeaea;
-} 
