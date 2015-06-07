@@ -17,6 +17,9 @@ session_start();
 	$dbname = 'mckinlek-db';
 	$dbuser = 'mckinlek-db';
 	$dbpass = '5qNWhVs2K36LBXi7';
+	
+	$sortByName = " ORDER BY ab.name";
+	$sortByLocation = " ORDER BY ab.State, ab.City, ab.Address, ab.name";
 
 	$mysql_handle = mysql_connect($dbhost, $dbuser, $dbpass)
 		or die("Error connecting to database server");
@@ -31,7 +34,7 @@ session_start();
 	if (isset($_SESSION['newUser']) ) {
 		$welcomeMessage = "Welcome, " . $_SESSION['username'] . ".  We hope you like using this address book!<br>";
 	}
-	$selectQuery = "SELECT ab.Name, ab.houseSize, ab.Address, ab.City, ab.State, ab.Zip FROM addressBook as ab INNER JOIN addressBookUsers as users ON ab.FK_userId=users.id WHERE users.username='" . $_SESSION['username'] . "';";
+	$selectQuery = "SELECT ab.id, ab.Name, ab.houseSize, ab.Address, ab.City, ab.State, ab.Zip, ab.private FROM addressBook as ab INNER JOIN addressBookUsers as users ON ab.FK_userId=users.id WHERE users.username='" . $_SESSION['username'] . "'" . $sortByName . ";";
 	//echo $selectQuery;
 	?>
 <!DOCTYPE html>
@@ -81,11 +84,18 @@ session_start();
 							url += '&City=' + encodeURIComponent($('#City').val());
 							url += '&State=' + encodeURIComponent($('#State').val());
 							url += '&Zip=' + encodeURIComponent($('#Zip').val());
+							if (!$('#private').is(':checked'))  {
+								//alert('checked');
+								url += '&private=1';
+							} 
+							else {
+								//don't mark as private
+							}
 							console.log(url);
-							 $.ajax({
-								type: 'GET',
-								url: url,           
-								success: function(data)
+							$.ajax({
+							type: 'GET',
+							url: url,           
+							success: function(data)
 								{
 									console.log(data);
 									$('#mainTable').html(data);
@@ -93,13 +103,30 @@ session_start();
 									$('#houseSize').val('');
 									$('#Address').val('');
 									$('#City').val('');
-									$('#State').val('');
+									$('#State').val('AL');
 									$('#Zip').val('');
+									$('#private').prop('checked', false);
 								}
-							 });
+							});
+							 								 
+							if($('#ToggleSort').attr("class") == "NameSorted") {
+								if ($('#TogglePublic').attr("class") == "withPublic") {
+									sortFilter(0, 1);
+								}
+								else {
+									sortFilter(0, 0);
+								}
+							}else {
+								if ($('#TogglePublic').attr("class") == "withPublic") {
+									sortFilter(1, 1);
+								}
+								else {
+									sortFilter(1, 0);
+								}
 							}
 						}
-				   });
+					}
+			   });
 				
 			});
 			$(document).on('click', '.updateEntry', function(){
@@ -132,6 +159,13 @@ session_start();
 							url += '&City=' + encodeURIComponent($('#City').val());
 							url += '&State=' + encodeURIComponent($('#State').val());
 							url += '&Zip=' + encodeURIComponent($('#Zip').val());
+							if (!$('#private').is(':checked'))  {
+								//alert('checked');
+								url += '&private=1';
+							} 
+							else {
+								//don't mark as private
+							}
 							console.log(url);
 							 $.ajax({
 								type: 'GET',
@@ -142,25 +176,153 @@ session_start();
 									//$('#mainTable').html(data);
 								}
 							 });
-							 selectUrl = "http://web.engr.oregonstate.edu/~mckinlek/CS290/FinalProject/queries.php?Select=1;"
-							 $.ajax({
-								type: 'GET',
-								url: selectUrl,           
-								success: function(data)
-								{
-									console.log(data);
-									$('#mainTable').html(data);
-									$('#newName').val('');
-									$('#houseSize').val('');
-									$('#Address').val('');
-									$('#City').val('');
-									$('#State').val('');
-									$('#Zip').val('');
+								 
+								if($('#ToggleSort').attr("class") == "NameSorted") {
+									if ($('#TogglePublic').attr("class") == "withPublic") {
+										sortFilter(0, 1);
+									}
+									else {
+										sortFilter(0, 0);
+									}
+								}else {
+									if ($('#TogglePublic').attr("class") == "withPublic") {
+										sortFilter(1, 1);
+									}
+									else {
+										sortFilter(1, 0);
+									}
 								}
-							 });
 							}
 						}
 				   });
+				
+			});
+			$(document).on('click', '#ToggleSort', function(e) {
+				//alert("going to name sorted");
+				if($('#ToggleSort').attr("class") == "NameSorted") {
+					if ($('#TogglePublic').attr("class") == "withPublic") {
+						sortFilter(0, 1);
+					}
+					else {
+						sortFilter(0, 0);
+					}
+					$('#ToggleSort').removeClass('NameSorted').addClass('LocationSorted');
+					$('#ToggleSort').val('Change to sort by Name');
+				}else {
+					if ($('#TogglePublic').attr("class") == "withPublic") {
+						sortFilter(1, 1);
+					}
+					else {
+						sortFilter(1, 0);
+					}
+					$('#ToggleSort').removeClass('LocationSorted').addClass('NameSorted');
+					$('#ToggleSort').val('Change to sort by Location');
+				}
+			
+			});
+			function sortFilter(byName, withPublic) {
+				var whereUrl = "http://web.engr.oregonstate.edu/~mckinlek/CS290/FinalProject/queries.php?";
+				if (byName == 1) {
+					whereUrl += "sortByName=1";
+				}
+				else {
+					whereUrl += "sortByLocation=1";
+				}
+				if (withPublic == 1) {
+					whereUrl += "&withPublic=1";
+				} else {
+					whereUrl += "&onlyPrivate=1";
+				}
+				console.log(whereUrl);
+				$.ajax({
+					type: 'GET',
+					url: whereUrl,           
+					success: function(data)
+					{
+						console.log(data);
+						$('#mainTable').html(data);
+						$('#newName').val('');
+						$('#newName').removeAttr("disabled"); 
+						$('#newEntry').attr('value', 'Add New Address');
+						$('#newEntry').removeClass('updateEntry').addClass('newEntry'); //http://stackoverflow.com/questions/10388492/jquery-change-button-id
+		
+						$('#houseSize').val('');
+						$('#Address').val('');
+						$('#City').val('');
+						$('#State').val('AL');
+						$('#Zip').val('');
+						$('#private').prop('checked', false);
+					}
+				 });
+			}
+			$(document).on('click', '.delete', function(data) {
+				var myId = this.id.substr(6,this.id.length);
+				if(!confirm("Are you sure you want to delete this entry?")) {
+					return;
+				}
+				//console.log("id of this Address is: " + myId);
+				var deleteUrl = "http://web.engr.oregonstate.edu/~mckinlek/CS290/FinalProject/queries.php?Delete=1&deleteId=" + myId;
+				console.log("ajax to: "+ deleteUrl);
+				$.ajax({
+					type: 'GET',
+					url: deleteUrl,           
+					success: function(data)
+					{
+						console.log("AJAX response: " + data);
+						$('#newName').val('');
+						$('#newName').removeAttr("disabled"); 
+						$('#newEntry').attr('value', 'Add New Address');
+						$('#newEntry').removeClass('updateEntry').addClass('newEntry'); //http://stackoverflow.com/questions/10388492/jquery-change-button-id
+		
+						$('#houseSize').val('');
+						$('#Address').val('');
+						$('#City').val('');
+						$('#State').val('AL');
+						$('#Zip').val('');
+						$('#private').prop('checked', false);
+					if($('#ToggleSort').attr("class") == "NameSorted") {
+						if ($('#TogglePublic').attr("class") == "withPublic") {
+							sortFilter(1, 1);
+						}
+						else {
+							sortFilter(1, 0);
+						}
+					}else {
+						if ($('#TogglePublic').attr("class") == "withPublic") {
+							sortFilter(0, 1);
+						}
+						else {
+							sortFilter(0, 0);
+						}
+					}
+					}
+				 });
+			});
+			$(document).on('click', '#TogglePublic', function(e) {
+				//alert("going to name sorted");
+				if($('#ToggleSort').attr("class") == "NameSorted") {
+					if ($('#TogglePublic').attr("class") == "withPublic") {
+						sortFilter(1, 0);
+						$('#TogglePublic').removeClass('withPublic').addClass('onlyPrivate');
+						$('#TogglePublic').val('Show public addresses');
+					}
+					else {
+						sortFilter(1, 1);
+						$('#TogglePublic').removeClass('onlyPrivate').addClass('withPublic');
+						$('#TogglePublic').val('Show only private addresses');
+					}
+				}else {
+					if ($('#TogglePublic').attr("class") == "withPublic") {
+						sortFilter(0, 0);
+						$('#TogglePublic').removeClass('withPublic').addClass('onlyPrivate');
+						$('#TogglePublic').val('Show public addresses');
+					}
+					else {
+						sortFilter(0, 1);
+						$('#TogglePublic').removeClass('onlyPrivate').addClass('withPublic');
+						$('#TogglePublic').val('Show only private addresses');
+					}
+				}
 				
 			});
 			$('#mainTable').on('click', 'th', function(e) {  //concept from http://stackoverflow.com/questions/21778477/get-column-header-and-row-header-on-cell-click
@@ -169,7 +331,18 @@ session_start();
 				if (e.delegateTarget.tHead.rows[0].cells[this.cellIndex] != this) {
 						//make sure they didn't click on the top row
 					var column = e.delegateTarget.tHead.rows[0].cells[this.cellIndex];
-					var name = this.parentNode.cells[0];
+					var name = this.parentNode.cells[0];	
+					$('#houseSize').val($(this.parentNode.cells[1]).text());
+					$('#Address').val($(this.parentNode.cells[2]).text());
+					$('#City').val($(this.parentNode.cells[3]).text());
+					$('#State').val($(this.parentNode.cells[4]).text());
+					$('#Zip').val($(this.parentNode.cells[5]).text());
+					if ($(this.parentNode.cells[6]).text() == "Private") {
+						$('#private').prop('checked', false);
+					}
+					else {
+						$('#private').prop('checked', true);
+					}
 					$('#newName').val($(name).text() );
 					$('#newName').attr("disabled", "disabled"); 
 					$('#newEntry').attr('value', 'Change ' + $(name).text() + '\'s Address');
@@ -192,16 +365,17 @@ session_start();
 <body>
 	<div id="TitleBar" class="TitleBar"><h1><?php echo $_SESSION['username'] . "'s Address Book";?></h1></div>
 	<div class="logout"><a class="button" href="http://web.engr.oregonstate.edu/~mckinlek/CS290/FinalProject/index.php?logout=1">Logout</a></div>
-	<form action="MyAddresses.php" method="POST">
+	<div id="input" class="wholeWidth">
+		<form action="MyAddresses.php" method="POST">
 		
 	
 		<table> <tr>
-		<td><b>Name: </td><td colspan="5"><input id="newName" type="text" name="inName" size="100" maxlength="254"></td></tr>
-		<td><b>Household Size: </td><td colspan="5"><input id="houseSize" type="number" name="inSize"></td></tr>
-		<tr><td><b>Address:</td><td colspan="5"><input id="Address" type="text" name="inAddress" size="100"  maxlength="254"></td></tr>
+		<td><b>Name: </b></td><td colspan="5"><input id="newName" type="text" name="inName" size="100" maxlength="254"></td></tr>
+		<tr><td><b>Household Size: </b></td><td colspan="5"><input id="houseSize" type="number" name="inSize"></td></tr>
+		<tr><td><b>Address:</b></td><td colspan="5"><input id="Address" type="text" name="inAddress" size="100"  maxlength="254"></td></tr>
 		<tr>
-			<td><b>City:</td><td><input id="City" type="text" name="inCity"  maxlength="254"></td>
-			<td><b>State:</td><td><select id="State" name="inState">
+			<td><b>City:</b></td><td><input id="City" type="text" name="inCity"  maxlength="254"></td>
+			<td><b>State:</b></td><td><select id="State" name="inState">
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -255,12 +429,21 @@ session_start();
 					<option value="WY">Wyoming</option>
 				</select>			
 				</td>
-			<td><b>Zip Code:</td><td><input id="Zip"t ype="text" name="inZip" maxlength="5"></td>
+			<td><b>Zip Code:</b></td><td><input id="Zip" type="text" name="inZip" maxlength="5"></td>
 		</tr>
+		<tr><td colspan="6">
+			<p><input id="private" type="checkbox" name="private" value="private">Make this address public for others to see</p>
+		</td></tr>
 		</table>
 		<input id="newEntry" class="newEntry" type="button" value="Add new address">
 		</form>
+	</div>
 	<br>
+	<div class="addressesTable"><h3>	Below is all of your addresses.  <br>
+				Click on the 'name' of any entry to edit it, or on the column header 'Name' to exit 'edit' mode. <br>
+				<input id="TogglePublic" class="onlyPrivate" type="button" value="Show public addresses">
+				<input id="ToggleSort" class="NameSorted" type="button" value="Change to sort by Location">
+			</h3>
 	<table id="mainTable" class="table table-striped table-bordered">
 		<thead><tr>
 			<th>Name</th>
@@ -269,6 +452,8 @@ session_start();
 			<th width="150">City</th>
 			<th width="10">State</th>
 			<th width="30">Zip Code</th>
+			<th width="40">Private</th>
+			<th>Delete</th>
 		</tr></thead>
 		<tbody>
 			<?php
@@ -277,7 +462,13 @@ session_start();
 					//var_dump($result);
 					//print rows
 					while($row = mysql_fetch_array($result)){
-						echo "<tr><th class=\"button\">$row[Name]</th><td>$row[houseSize]</td><td>$row[Address]</td><td>$row[City]</td><td>$row[State]</td><td>$row[Zip]</td></tr>\n";
+						echo "<tr><th class=\"button\">$row[Name]</th><td>$row[houseSize]</td><td>$row[Address]</td><td>$row[City]</td><td>$row[State]</td><td>$row[Zip]</td>";
+						if($row['private'] == '0') {
+							echo "<td>Public</td>";
+						} else {
+							echo "<td>Private</td>";
+						}
+						echo "<td><input id=\"delete$row[id]\" class=\"delete\" type=\"button\" value=\"Delete\"></td></tr>\n";
 					}
 				} else {
 					//no rows for user
@@ -285,5 +476,6 @@ session_start();
 				}
 			?>
 		</tbody>
-	</table>
-<body>
+	</table></div>
+</body>
+</html>

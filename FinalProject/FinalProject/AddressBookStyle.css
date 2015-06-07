@@ -45,16 +45,28 @@ p {
 	height: 100px;
 	color: c34500;
 }
+
+.wholeWidth {
+	position:absolute;
+	left:0;
+	top:100px;
+	width: 100%;
+	color: c34500;
+}
+.addressesTable {
+	position:absolute;
+	left:0;
+	top:250px;
+	width: 100%;
+	color: c34500;
+}
+
 .logout {
    position:absolute;
    top:0;
    right:0;
    font-size: 1.5em;
    color: 999;
-}
-.nodeGraphic {
-	height: 200px;
-	margin-right: 5px;
 }
 nav-item {
   position: relative;
@@ -117,7 +129,7 @@ h2 {
 	font-size: 1.8em;
 }
 .mainText {
-	width: 50%;
+	width: 75%;
 }
 
 p {
@@ -126,9 +138,6 @@ p {
 
 table {
     width: 75%;
-}
-.table-striped > thead > tr:nth-child(odd) > th   {
-	background-color: #c34500;
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td,
@@ -139,6 +148,9 @@ table {
 .table-striped > tbody > tr:nth-child(even) > th {
 	background-color: #f5f2ed;
 } 
+.table-striped > thead > tr:nth-child(odd) > th, .table-striped > tbody > .thead   {
+	background-color: #c34500;
+}
 .button {
   /*font: bold 11px Arial;*/
   text-decoration: none;

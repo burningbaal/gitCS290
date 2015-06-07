@@ -71,7 +71,8 @@ mysql_select_db($dbname, $mysql_handle)
 							}
 							//alert(result);
 							loginOutput = result;
-							$('#usernameAbsent').html(loginOutput);
+							//$('#usernameAbsent').html(loginOutput);
+							return;
 					});
 					//loginOutput = result + "<br>";
 					//$('#usernameAbsent').html(loginOutput);
@@ -116,9 +117,10 @@ mysql_select_db($dbname, $mysql_handle)
 							}
 							//alert(result);
 							signupOutput = result;
-							$('#signupOutput').html(signupOutput);
+							//$('#signupOutput').html(signupOutput);
+							return;
 					});
-					signupOutput += 'Tried to submit<br>';
+					//signupOutput += 'Tried to submit<br>';
 				}
 				$('#signupOutput').html(signupOutput);
 				signupOutput = '';
@@ -204,7 +206,7 @@ Welcome to The Address Book!
 				alert("Please enter a password");
 				return false;
 			}
-			alert("form is ok");
+			//alert("form is ok");
 			document.login.submit();
 			return true;
 		}
@@ -236,7 +238,7 @@ Welcome to The Address Book!
 		<!--input type="submit"-->
 	</form>
 	</fieldset>
-	<a href="MyAddresses.php">Test Link</a>
+	
 	<fieldset>
 	<h3>New Users, create an account:</h3>
 	<form id="signup" method="POST" action="loginChecker.php">
