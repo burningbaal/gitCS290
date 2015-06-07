@@ -40,7 +40,8 @@ p {
 	color: gray;
 }
 .TitleBar {
-	float: left;
+	position:absolute;
+	left:25px;
 	width: 70%;
 	height: 100px;
 	color: c34500;
@@ -48,23 +49,24 @@ p {
 
 .wholeWidth {
 	position:absolute;
-	left:0;
+	padding-left:25px;
 	top:100px;
 	width: 100%;
 	color: c34500;
 }
 .addressesTable {
 	position:absolute;
-	left:0;
-	top:250px;
-	width: 100%;
+	padding-left:25px;
+	padding-right:25px;
+	top:275px;
+	
 	color: c34500;
 }
 
 .logout {
    position:absolute;
-   top:0;
-   right:0;
+   top:10px;
+   right:10px;
    font-size: 1.5em;
    color: 999;
 }
@@ -154,7 +156,7 @@ table {
 .button {
   /*font: bold 11px Arial;*/
   text-decoration: none;
-  background-color: c34500;
+  background-color: #f5f2ed;
   color: #333333;
   padding: 2px 6px 2px 6px;
   border-top: 4px solid #CCCCCC;

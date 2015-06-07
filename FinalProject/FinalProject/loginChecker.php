@@ -70,6 +70,9 @@
 				$_SESSION['newUser'] = 1;
 				die;
 			} 
+			else {
+				echo "There is no user name with that password.";
+			}
 			die;
 		}
 	}

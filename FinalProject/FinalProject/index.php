@@ -59,25 +59,22 @@ mysql_select_db($dbname, $mysql_handle)
 					$.post( $("#login").attr("action"),
 					{ name: loginName, pass: password },
 						function(result){ 
-							//alert(result);
+							console.log(result);
+							$('#usernameAbsent').html("<div id='usernameAbsent'><font color=\"red\">" + result + "</font></div>");
 							if (result.indexOf("http://") >= 0) {
 								//alert(result);
 								$form = $('<form action="' + result + '" method="post">' + '<input type="text" name="user" value="' + loginName + '" />' + '</form>');
 								$('body').append($form);
 								console.log($form.serialize());
 								$form.submit();
-								//alert("didn't submit");
-								//window.location.replace(result);
+								return;
 							}
-							//alert(result);
-							loginOutput = result;
-							//$('#usernameAbsent').html(loginOutput);
-							return;
-					});
-					//loginOutput = result + "<br>";
-					//$('#usernameAbsent').html(loginOutput);
+							else {
+								loginOutput += result;
+							}
+						});
 				}
-				$('#usernameAbsent').html(loginOutput);
+				$('#usernameAbsent').html("<div id='usernameAbsent'><font color=\"red\">" + loginOutput + "</font></div>");
 			}); 
 			
 			
@@ -122,7 +119,7 @@ mysql_select_db($dbname, $mysql_handle)
 					});
 					//signupOutput += 'Tried to submit<br>';
 				}
-				$('#signupOutput').html(signupOutput);
+				$('#signupOutput').html("<font color=\"red\">" + signupOutput + "</font>");
 				signupOutput = '';
 			}); 
 			function uNameValid(uName) {
@@ -189,7 +186,7 @@ mysql_select_db($dbname, $mysql_handle)
 	</script>
 	
 </head>
-<h1>
+<h1 style="padding-left:25px">
 Welcome to The Address Book!
 </h1>
 <body>
@@ -227,6 +224,7 @@ Welcome to The Address Book!
 		}
 	</script>
 	<fieldset>
+	<div style="padding-left:25px">
 	<h3>Returning users, login:</h3>
 	<form id="login" method="POST" action="loginChecker.php">
 		<table> <tr>
@@ -236,10 +234,11 @@ Welcome to The Address Book!
 		<div id='usernameAbsent'></div>
 		<input id="loginSubmit" type="button" value="Sign in"">
 		<!--input type="submit"-->
-	</form>
+	</form></div>
 	</fieldset>
 	
 	<fieldset>
+	<div style="padding-left:25px">
 	<h3>New Users, create an account:</h3>
 	<form id="signup" method="POST" action="loginChecker.php">
 		<table> <tr>
@@ -255,6 +254,7 @@ Welcome to The Address Book!
 		<!--input type="button" name="signup" value="Sign up!" onclick="checkSignup()"-->
 	
 	</form>
+	</div>
 `	</fieldset>
 </body>
 </html>

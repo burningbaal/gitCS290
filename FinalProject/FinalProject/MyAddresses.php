@@ -438,8 +438,8 @@ session_start();
 		<input id="newEntry" class="newEntry" type="button" value="Add new address">
 		</form>
 	</div>
-	<br>
-	<div class="addressesTable"><h3>	Below is all of your addresses.  <br>
+	<br><br>
+	<div class="addressesTable"><h4>Your addresses are below.  <br>
 				Click on the 'name' of any entry to edit it, or on the column header 'Name' to exit 'edit' mode. <br>
 				<input id="TogglePublic" class="onlyPrivate" type="button" value="Show public addresses">
 				<input id="ToggleSort" class="NameSorted" type="button" value="Change to sort by Location">
